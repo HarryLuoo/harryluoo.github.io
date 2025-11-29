@@ -168,16 +168,18 @@ const Research: React.FC = () => {
                 </a>
               )}
               
-              <button 
-                onClick={() => handleCopyBibtex(paper)}
-                className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black transition-colors"
-              >
-                {copiedId === paper.id ? (
-                  <><Check size={14} className="mr-1 text-green-600" /> Copied</>
-                ) : (
-                  <><ExternalLink size={14} className="mr-1" /> BibTeX</>
-                )}
-              </button>
+              {paper.includeBibtex && (
+                <button 
+                  onClick={() => handleCopyBibtex(paper)}
+                  className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black transition-colors"
+                >
+                  {copiedId === paper.id ? (
+                    <><Check size={14} className="mr-1 text-green-600" /> Copied</>
+                  ) : (
+                    <><ExternalLink size={14} className="mr-1" /> BibTeX</>
+                  )}
+                </button>
+              )}
             </div>
 
             <div className="mt-4 flex gap-2">

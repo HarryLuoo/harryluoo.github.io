@@ -34,24 +34,24 @@
     "description": "My undergraduate research focuses on quantum error mitigation."
   },
   "tags": [
-    "Quantum Computing",
-    "Error Mitigation",
-    "Quantum Metrology",
-    "Python",
-    "Simulation",
-    "MATLAB",
-    "Simulink",
+    "CNN",
     "Control Theory",
-    "Optimization",
-    "MILP",
-    "QuTiP",
-    "Quantum Physics",
+    "Deep Learning",
+    "Error Mitigation",
     "FEA",
     "Math",
-    "Deep Learning",
-    "CNN",
-    "Stochastic Modeling",
-    "Quantum"
+    "MATLAB",
+    "MILP",
+    "Optimization",
+    "Python",
+    "Quantum",
+    "Quantum Computing",
+    "Quantum Metrology",
+    "Quantum Physics",
+    "QuTiP",
+    "Simulation",
+    "Simulink",
+    "Stochastic Modeling"
   ],
   "profile": {
     "name": "Guizhong (Harry) Luo",
@@ -100,7 +100,7 @@
       ],
       "venue": "Preparing",
       "year": 2025,
-      "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes.",
+      "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes. Paper in preparation.",
       "tags": [
         "Quantum Computing",
         "Error Mitigation"
@@ -113,7 +113,6 @@
       "id": "p2",
       "title": "Contextual Quantum Fisher Information Verification",
       "authors": [
-        "Guizhong Luo",
         "Quantum Photonics Lab (NJU)"
       ],
       "venue": "Research Experience",

@@ -554,6 +554,7 @@ class WebsiteCMS:
         self.add_file_selector(parent, "Detailed Content", item, "content")
         self.add_pdf_selector(parent, "PDF Link (URL or relative path)", item, "pdfLink")
         self.add_entry(parent, "Code Link (URL)", item, "codeLink")
+        self.add_checkbox(parent, "Include BibTeX?", item, "includeBibtex")
         self.add_text_area(parent, "BibTeX", item, "bibtex", height=4)
 
     # ==========================

@@ -8,6 +8,7 @@ export interface Paper {
   description: string;
   pdfLink?: string;
   codeLink?: string;
+  includeBibtex?: boolean; // Toggle for bibtex
   bibtex?: string;
   tags: string[];
   content?: string; // Path to markdown file

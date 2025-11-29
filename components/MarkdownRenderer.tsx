@@ -24,7 +24,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
              // Extract inline property safely
              // eslint-disable-next-line @typescript-eslint/no-unused-vars
              const { inline, className, children, ...rest } = props as any;
-             const match = /language-(\w+)/.exec(className || '');
+             // const match = /language-(\w+)/.exec(className || '');
              return !inline ? (
                <div className="bg-stone-100 p-4 rounded-md my-4 border-l-4 border-academic-orange overflow-x-auto">
                  <code className={className} {...rest}>

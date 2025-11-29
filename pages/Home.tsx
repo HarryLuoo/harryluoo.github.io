@@ -23,7 +23,7 @@ const buildFontFamily = (english?: string, chinese?: string) => {
 
 const Home: React.FC = () => {
   const {
-    recentMode,
+    // recentMode,
     recentManualEntries,
     recentAutoLimit,
     featuredEntry,

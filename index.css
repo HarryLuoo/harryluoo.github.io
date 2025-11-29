@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f2f0e9;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600; /* Cinzel looks better with a bit of weight */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #be5d36; 
+}

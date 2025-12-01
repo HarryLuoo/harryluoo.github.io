@@ -22,6 +22,14 @@ const data = {
         "link": "",
         "ctaLabel": "",
         "imageUrl": ""
+      },
+      {
+        "title": "Hackathon Winner, UMN Quantum+Chips",
+        "dateLabel": "08-2025",
+        "description": "We made a simulation on qubit crosstalk, which won us top heckathon project.",
+        "link": "",
+        "ctaLabel": "",
+        "imageUrl": ""
       }
     ],
     "featuredEntry": {
@@ -31,7 +39,7 @@ const data = {
     }
   },
   "researchPage": {
-    "description": "My undergraduate research focuses on quantum error mitigation."
+    "description": "My undergraduate research focuses on Quantum Information Science."
   },
   "tags": [
     "CNN",
@@ -100,7 +108,7 @@ const data = {
       ],
       "venue": "Preparing",
       "year": 2025,
-      "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes. Paper in preparation.",
+      "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes. Paper in preparation. Manuscript draft in attachment.",
       "tags": [
         "Quantum Computing",
         "Error Mitigation"

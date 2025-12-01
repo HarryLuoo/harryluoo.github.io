@@ -113,7 +113,7 @@ const data = {
         "Quantum Computing",
         "Error Mitigation"
       ],
-      "pdfLink": "#",
+      "pdfLink": "/uploads/GKP_paperv7.pdf",
       "codeLink": "#",
       "content": ""
     },

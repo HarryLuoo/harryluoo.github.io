@@ -11,7 +11,7 @@ const data = {
   },
   "homepage": {
     "tabTitle": "G. Z. Luo",
-    "projectsDescription": "Fun projects that I do",
+    "projectsDescription": "Fun projects that I do.",
     "recentMode": "auto",
     "recentAutoLimit": 3,
     "recentManualEntries": [
@@ -55,7 +55,7 @@ const data = {
   ],
   "profile": {
     "name": "Guizhong (Harry) Luo",
-    "role": "Undergraduate Researcher",
+    "role": "Undergrad",
     "affiliation": "University of Wisconsin - Madison",
     "bio": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
     "showBio": false,
@@ -117,13 +117,13 @@ const data = {
       ],
       "venue": "Research Experience",
       "year": 2024,
-      "description": "Verified theoretical framework of contextual quantum Fisher information through numerical simulations and compared performance versus traditional QFI in metrology applications.",
+      "description": "Verified theoretical framework of contextual quantum Fisher information through numerical simulations and compared performance versus traditional QFI in metrology applications. Note in attachment.",
       "tags": [
         "Quantum Metrology",
         "Python",
         "Simulation"
       ],
-      "pdfLink": "",
+      "pdfLink": "/uploads/ContextualQM.pdf",
       "content": ""
     }
   ],
@@ -164,7 +164,7 @@ const data = {
         "Quantum Physics"
       ],
       "imageUrl": "",
-      "github": "#",
+      "github": "https://github.com/HarryLuoo/quantum_chip_2025_gymrats",
       "content": ""
     },
     {
@@ -177,7 +177,7 @@ const data = {
         "Math"
       ],
       "imageUrl": "",
-      "github": "#",
+      "github": "https://github.com/HarryLuoo/FEA_Brachistochrone",
       "content": "posts/brachistochrone.md"
     },
     {

@@ -1,3 +1,4 @@
+#use this to make updates
 import json
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext, filedialog

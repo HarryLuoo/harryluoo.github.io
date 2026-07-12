@@ -5,6 +5,8 @@
 body {
   background-color: #f2f0e9;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  margin: 0;
+  min-width: 320px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,4 +29,16 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #be5d36; 
+}
+
+:focus-visible {
+  outline: 3px solid #be5d36;
+  outline-offset: 3px;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  border-radius: 0;
+  color: inherit;
+  padding: 0;
 }

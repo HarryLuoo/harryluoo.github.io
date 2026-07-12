@@ -1,0 +1,281 @@
+{
+  "seo": {
+    "siteUrl": "https://harryluoo.github.io",
+    "defaultTitle": "G. Z. Luo",
+    "titleSuffix": "G. Z. Luo",
+    "defaultDescription": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
+    "openGraph": {
+      "siteName": "G. Z. Luo",
+      "type": "website"
+    },
+    "twitter": {
+      "card": "summary"
+    },
+    "robots": {
+      "index": true,
+      "follow": true
+    }
+  },
+  "shell": {
+    "profile": {
+      "name": "Guizhong (Harry) Luo",
+      "role": "Undergrad",
+      "affiliation": "University of Wisconsin - Madison",
+      "bio": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
+      "showBio": false,
+      "email": "harry.luo@wisc.edu"
+    },
+    "socials": [
+      {
+        "platform": "github",
+        "url": "https://github.com/HarryLuoo",
+        "visible": true,
+        "order": 0
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/in/gzluo",
+        "visible": true,
+        "order": 1
+      }
+    ],
+    "cvUpload": "/uploads/Harry CV.pdf",
+    "navigation": [
+      {
+        "id": "home",
+        "label": "HOME",
+        "kind": "internal",
+        "route": "/",
+        "visible": true,
+        "order": 0
+      },
+      {
+        "id": "research",
+        "label": "RESEARCH",
+        "kind": "internal",
+        "route": "/research",
+        "visible": true,
+        "order": 1
+      },
+      {
+        "id": "projects",
+        "label": "PROJECTS",
+        "kind": "internal",
+        "route": "/projects",
+        "visible": true,
+        "order": 2
+      },
+      {
+        "id": "garden",
+        "label": "GARDEN",
+        "kind": "internal",
+        "route": "/garden",
+        "visible": true,
+        "order": 3
+      },
+      {
+        "id": "cv",
+        "label": "CV",
+        "kind": "cv",
+        "visible": true,
+        "order": 4
+      }
+    ]
+  },
+  "home": {
+    "hero": {
+      "headline": "子根斋",
+      "subheadline": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world."
+    },
+    "recent": {
+      "mode": "manual",
+      "autoLimit": 3,
+      "automaticEntries": [],
+      "manualEntries": [
+        {
+          "title": "Trewartha Thesis Research Grant",
+          "dateLabel": "11-2025",
+          "description": "Awarded for senior thesis conducting a theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence.",
+          "visible": true,
+          "order": 0
+        },
+        {
+          "title": "Hackathon Winner, UMN Quantum+Chips",
+          "dateLabel": "08-2025",
+          "description": "We made a simulation on qubit crosstalk, which won us top heckathon project.",
+          "visible": true,
+          "order": 1
+        }
+      ]
+    },
+    "featured": {
+      "entityType": "paper",
+      "slug": "energy-scaled-zero-noise-extrapolation",
+      "visible": true
+    },
+    "projectsDescription": "Fun projects that I do.",
+    "gardenDescription": "Notes, thoughts, and derivations. A digital garden."
+  },
+  "research": {
+    "description": "My undergraduate research focuses on Quantum Information Science.",
+    "papers": [
+      {
+        "slug": "energy-scaled-zero-noise-extrapolation",
+        "title": "Energy-Scaled Zero Noise Extrapolation for Gottesman-Kitaev-Preskill Code",
+        "authors": [
+          "Guizhong Luo",
+          "Matthew Otten"
+        ],
+        "venue": "Preparing",
+        "year": 2025,
+        "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes. Paper in preparation. Manuscript draft in attachment.",
+        "tags": [
+          "Quantum Computing",
+          "Error Mitigation"
+        ],
+        "pdfUpload": "/uploads/GKP_paperv7.pdf",
+        "bibtexVisible": false,
+        "visible": true,
+        "order": 0
+      },
+      {
+        "slug": "contextual-quantum-fisher-information-verification",
+        "title": "Contextual Quantum Fisher Information Verification",
+        "authors": [
+          "Quantum Photonics Lab (NJU)"
+        ],
+        "venue": "Research Experience",
+        "year": 2024,
+        "description": "Verified theoretical framework of contextual quantum Fisher information through numerical simulations and compared performance versus traditional QFI in metrology applications. Note in attachment.",
+        "tags": [
+          "Quantum Metrology",
+          "Python",
+          "Simulation"
+        ],
+        "pdfUpload": "/uploads/ContextualQM.pdf",
+        "bibtexVisible": false,
+        "visible": true,
+        "order": 1
+      }
+    ]
+  },
+  "projects": {
+    "items": [
+      {
+        "slug": "badger-solar-car-optimization",
+        "title": "Badger Solar Car Optimization",
+        "description": "Numerical simulation and optimization system for a solar-powered race car. Implemented receding horizon control and modeled electrical/mechanical components (Solar Array, BMS, Resistive Forces) in MATLAB & Simulink.",
+        "tags": [
+          "MATLAB",
+          "Simulink",
+          "Control Theory"
+        ],
+        "visible": true,
+        "order": 0
+      },
+      {
+        "slug": "campus-dining-optimization",
+        "title": "Campus Dining Optimization",
+        "description": "A Mixed-Integer Linear Programming (MILP) project for optimizing weekly restaurant choices under constraints of time, money, and nutrients. Top Course Project for ISyE 524.",
+        "tags": [
+          "Optimization",
+          "MILP",
+          "Python"
+        ],
+        "visible": true,
+        "order": 1
+      },
+      {
+        "slug": "multi-qubit-crosstalk-simulation",
+        "title": "Multi-Qubit Crosstalk Simulation",
+        "description": "Winner of Quantum + Chips 2025 Hackathon. Simulated a 3-qubit system coupled under a driving magnetic field to observe crosstalk and mitigated it using a compensation Hamiltonian.",
+        "tags": [
+          "QuTiP",
+          "Python",
+          "Quantum Physics"
+        ],
+        "repositoryUrl": "https://github.com/HarryLuoo/quantum_chip_2025_gymrats",
+        "visible": true,
+        "order": 2
+      },
+      {
+        "slug": "brachistochrone-fea-solution",
+        "title": "Brachistochrone FEA Solution",
+        "description": "Numerical solution to the classical Brachistochrone problem using Finite Element Analysis with P2 element discretization. Applied Gaussian quadrature and L-BFGS-B optimization.",
+        "tags": [
+          "FEA",
+          "Optimization",
+          "Math"
+        ],
+        "repositoryUrl": "https://github.com/HarryLuoo/FEA_Brachistochrone",
+        "articleSlug": "brachistochrone",
+        "visible": true,
+        "order": 3
+      },
+      {
+        "slug": "deep-time-steps-patterns-of-wear",
+        "title": "Deep-time Steps: Patterns of Wear",
+        "description": "Stochastic model to simulate stair wear patterns based on probabilistic pedestrian behavior. Trained a CNN on the simulation to analyze usage patterns.",
+        "tags": [
+          "Deep Learning",
+          "CNN",
+          "Stochastic Modeling"
+        ],
+        "visible": true,
+        "order": 4
+      }
+    ]
+  },
+  "garden": {
+    "description": "A collection of notes, derivations, and thoughts. Not quite a blog, but a growing repository of knowledge.",
+    "posts": [
+      {
+        "slug": "solving-the-brachistochrone-with-fea",
+        "title": "Solving the Brachistochrone with FEA",
+        "date": "Apr 15, 2025",
+        "excerpt": "A numerical approach to the classical curve of fastest descent using Finite Element Analysis and P2 discretization.",
+        "tags": [
+          "Math",
+          "FEA",
+          "Optimization"
+        ],
+        "articleSlug": "brachistochrone",
+        "visible": true,
+        "order": 0
+      },
+      {
+        "slug": "simulating-quantum-crosstalk",
+        "title": "Simulating Quantum Crosstalk",
+        "date": "Aug 20, 2025",
+        "excerpt": "Insights from the Quantum + Chips Hackathon: using QuTiP to model compensation Hamiltonians.",
+        "tags": [
+          "Quantum",
+          "Python"
+        ],
+        "articleSlug": "simulating-quantum-crosstalk",
+        "visible": true,
+        "order": 1
+      }
+    ]
+  },
+  "tags": [
+    "CNN",
+    "Control Theory",
+    "Deep Learning",
+    "Error Mitigation",
+    "FEA",
+    "Math",
+    "MATLAB",
+    "MILP",
+    "Optimization",
+    "Python",
+    "Quantum",
+    "Quantum Computing",
+    "Quantum Metrology",
+    "Quantum Physics",
+    "QuTiP",
+    "Simulation",
+    "Simulink",
+    "Stochastic Modeling"
+  ]
+}

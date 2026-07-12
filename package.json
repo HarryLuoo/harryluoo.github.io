@@ -5,17 +5,22 @@
   "scripts": {
     "start": "vite --port 8080",
     "build": "tsc && vite build",
+    "typecheck": "tsc",
+    "verify": "node scripts/verify.mjs",
+    "check:content": "vite build --mode validation-probes --outDir /tmp/harry-loop1-validation-probes --emptyOutDir",
+    "studio": "node scripts/studio.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "katex": "^0.16.9",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.22.0",
-    "remark-math": "^6.0.0",
     "rehype-katex": "^7.0.0",
-    "katex": "^0.16.9"
+    "remark-math": "^6.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

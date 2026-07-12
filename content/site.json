@@ -3,7 +3,7 @@
     "siteUrl": "https://harryluoo.github.io",
     "defaultTitle": "子根斋",
     "titleSuffix": "G. Z. Luo",
-    "defaultDescription": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
+    "defaultDescription": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
     "openGraph": {
       "siteName": "G. Z. Luo",
       "type": "website"
@@ -19,11 +19,11 @@
   "shell": {
     "profile": {
       "name": "Guizhong (Harry) Luo",
-      "role": "Undergrad",
-      "affiliation": "University of Wisconsin - Madison",
-      "bio": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
+      "role": "PhD Student",
+      "affiliation": "University of Minnesota Twin Cities",
+      "bio": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
       "showBio": false,
-      "email": "harry.luo@wisc.edu"
+      "email": "luo00309@umn.edu"
     },
     "socials": [
       {
@@ -85,7 +85,7 @@
   "home": {
     "hero": {
       "headline": "Harry Luo",
-      "subheadline": "PhD student exploring the intersect of quantum computation and condensed matter physics."
+      "subheadline": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics."
     },
     "recent": {
       "mode": "manual",
@@ -93,18 +93,25 @@
       "automaticEntries": [],
       "manualEntries": [
         {
-          "title": "Trewartha Thesis Research Grant",
-          "dateLabel": "11-2025",
-          "description": "Awarded for senior thesis conducting a theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence.",
+          "title": "PhD Study at the University of Minnesota",
+          "dateLabel": "08-2026",
+          "description": "Began doctoral study in Electrical Engineering with the Low Group, focusing on computational condensed matter physics.",
           "visible": true,
           "order": 0
         },
         {
-          "title": "Hackathon Winner, UMN Quantum+Chips",
-          "dateLabel": "08-2025",
-          "description": "We made a simulation on qubit crosstalk, which won us top heckathon project.",
+          "title": "Wisconsin Quantum Institute Research Excellence Award",
+          "dateLabel": "04-2026",
+          "description": "Received for the best research presentation at the UW-Madison ECE Undergraduate Research Symposium.",
           "visible": true,
           "order": 1
+        },
+        {
+          "title": "APS Global Physics Summit",
+          "dateLabel": "03-2026",
+          "description": "Presented a contributed talk on energy-scaled zero-noise extrapolation for GKP codes.",
+          "visible": true,
+          "order": 2
         }
       ]
     },
@@ -113,30 +120,50 @@
       "slug": "energy-scaled-zero-noise-extrapolation",
       "visible": true
     },
-    "projectsDescription": "Fun projects that I do.",
-    "gardenDescription": "Notes, thoughts, and derivations. A digital garden."
+    "projectsDescription": "Selected computational and scientific projects.",
+    "gardenDescription": "Notes, derivations, and technical writing."
   },
   "research": {
-    "description": "My undergraduate research focuses on Quantum Information Science.",
+    "description": "My research spans computational condensed matter physics, quantum information science, and numerical methods for quantum systems.",
     "papers": [
       {
-        "slug": "energy-scaled-zero-noise-extrapolation",
-        "title": "Energy-Scaled Zero Noise Extrapolation for Gottesman-Kitaev-Preskill Code",
+        "slug": "a-qubit-in-an-oscillator",
+        "title": "A Qubit in an Oscillator: From Ideal GKP Codes to Energy-Scaled Error Mitigation",
         "authors": [
-          "Guizhong Luo",
-          "Matthew Otten"
+          "Guizhong Luo"
         ],
-        "venue": "Preparing",
-        "year": 2025,
-        "description": "Theoretical and numerical study of Gottesman-Kitaev-Preskill (GKP) codes under pure-loss decoherence. Developed an energy-scaled zero-noise extrapolation method for quantum error mitigation in bosonic codes. Paper in preparation. Manuscript draft in attachment.",
+        "venue": "Physics Honors Thesis, UW-Madison",
+        "year": 2026,
+        "description": "An introduction to Gottesman-Kitaev-Preskill codes, from their ideal phase-space construction to finite-energy implementations in bosonic systems. The thesis studies GKP states under pure photon loss and develops energy-scaled zero-noise extrapolation as a mitigation strategy.",
         "tags": [
           "Quantum Computing",
           "Error Mitigation"
         ],
-        "pdfUpload": "/uploads/GKP_paperv7.pdf",
+        "pdfUpload": "/uploads/Thesis_GZLuo.pdf",
+        "permalinkUrl": "http://digital.library.wisc.edu/1793/97588",
         "bibtexVisible": false,
         "visible": true,
         "order": 0
+      },
+      {
+        "slug": "energy-scaled-zero-noise-extrapolation",
+        "title": "Energy-Scaled Zero-Noise Extrapolation for Gottesman-Kitaev-Preskill Code",
+        "authors": [
+          "Gui-Zhong Luo",
+          "Matthew Otten"
+        ],
+        "venue": "arXiv:2512.03583; submitted to npj Quantum Information",
+        "year": 2025,
+        "description": "Introduces energy-scaled zero-noise extrapolation for finite-energy GKP codes. Numerical simulations under pure photon loss show how mean photon number can serve as an intrinsic noise-scaling parameter for recovering near-ideal logical observables.",
+        "tags": [
+          "Quantum Computing",
+          "Error Mitigation"
+        ],
+        "pdfUpload": "/uploads/GKP_paper.pdf",
+        "permalinkUrl": "https://arxiv.org/abs/2512.03583",
+        "bibtexVisible": false,
+        "visible": true,
+        "order": 1
       },
       {
         "slug": "contextual-quantum-fisher-information-verification",
@@ -154,8 +181,8 @@
         ],
         "pdfUpload": "/uploads/ContextualQM.pdf",
         "bibtexVisible": false,
-        "visible": true,
-        "order": 1
+        "visible": false,
+        "order": 2
       }
     ]
   },
@@ -183,7 +210,7 @@
           "Python"
         ],
         "visible": true,
-        "order": 1
+        "order": 2
       },
       {
         "slug": "multi-qubit-crosstalk-simulation",
@@ -196,7 +223,7 @@
         ],
         "repositoryUrl": "https://github.com/HarryLuoo/quantum_chip_2025_gymrats",
         "visible": true,
-        "order": 2
+        "order": 1
       },
       {
         "slug": "brachistochrone-fea-solution",
@@ -227,7 +254,7 @@
     ]
   },
   "garden": {
-    "description": "A collection of notes, derivations, and thoughts. Not quite a blog, but a growing repository of knowledge.",
+    "description": "Notes, derivations, and technical writing.",
     "posts": [
       {
         "slug": "solving-the-brachistochrone-with-fea",
@@ -240,7 +267,7 @@
           "Optimization"
         ],
         "articleSlug": "brachistochrone",
-        "visible": true,
+        "visible": false,
         "order": 0
       },
       {
@@ -253,7 +280,7 @@
           "Python"
         ],
         "articleSlug": "simulating-quantum-crosstalk",
-        "visible": true,
+        "visible": false,
         "order": 1
       }
     ]

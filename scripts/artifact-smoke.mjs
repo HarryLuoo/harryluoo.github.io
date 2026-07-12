@@ -92,7 +92,7 @@ export const smokeArtifacts = async (projectRoot, site, discovery) => {
     ...site.projects.items.filter((item) => item.visible).map((item) => ({ namespace: 'projects', ...item })),
     ...site.garden.posts.filter((item) => item.visible).map((item) => ({ namespace: 'garden', ...item })),
   ];
-  if (visibleEntities.length !== 9) fail(`Expected nine visible detail routes, found ${visibleEntities.length}`);
+  if (visibleEntities.length !== 7) fail(`Expected seven visible detail routes, found ${visibleEntities.length}`);
   for (const entity of visibleEntities) {
     if (!bundleText.includes(entity.slug) || !bundleText.includes(entity.title)) {
       fail(`Built bundle is missing ${entity.namespace}/${entity.slug}`);

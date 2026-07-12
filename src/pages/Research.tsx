@@ -20,6 +20,7 @@ const PaperActions = ({ paper }: { paper: Paper }) => {
   return (
     <div className="flex flex-wrap gap-4">
       {paper.pdfUpload && <a href={paper.pdfUpload} target="_blank" rel="noreferrer" className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black"><FileText aria-hidden="true" size={14} className="mr-1" /> PDF</a>}
+      {paper.permalinkUrl && <a href={paper.permalinkUrl} target="_blank" rel="noreferrer" className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black"><ExternalLink aria-hidden="true" size={14} className="mr-1" /> Permalink</a>}
       {paper.codeUrl && <a href={paper.codeUrl} target="_blank" rel="noreferrer" className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black"><Code aria-hidden="true" size={14} className="mr-1" /> Code</a>}
       {paper.bibtexVisible && <button type="button" onClick={copyBibtex} className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-academic-black"><span aria-live="polite" className="inline-flex items-center">{copied ? <><Check aria-hidden="true" size={14} className="mr-1 text-green-600" /> Copied</> : <><ExternalLink aria-hidden="true" size={14} className="mr-1" /> BibTeX</>}</span></button>}
     </div>

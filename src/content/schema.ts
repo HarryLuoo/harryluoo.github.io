@@ -135,6 +135,7 @@ const paperSchema = z.strictObject({
   description: z.string().min(1),
   tags: tagList,
   pdfUpload: uploadPath.optional(),
+  permalinkUrl: externalUrl.optional(),
   codeUrl: externalUrl.optional(),
   bibtexVisible: z.boolean(),
   bibtex: z.string().min(1).optional(),

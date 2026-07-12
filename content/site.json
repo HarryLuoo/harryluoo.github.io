@@ -1,7 +1,7 @@
 {
   "seo": {
     "siteUrl": "https://harryluoo.github.io",
-    "defaultTitle": "G. Z. Luo",
+    "defaultTitle": "子根斋",
     "titleSuffix": "G. Z. Luo",
     "defaultDescription": "Exploring Quantum Information Science, Simulations, and the complexity of our natrual world.",
     "openGraph": {
@@ -84,7 +84,7 @@
   },
   "home": {
     "hero": {
-      "headline": "子根斋",
+      "headline": "Harry Luo",
       "subheadline": "PhD student exploring the intersect of quantum computation and condensed matter physics."
     },
     "recent": {

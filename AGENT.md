@@ -143,6 +143,23 @@ The click handler is a no-op until all conditions pass, and the API repeats the
 security and freshness checks. Do not change this to a cosmetic-only disabled
 state or weaken the server checks to match UI behavior.
 
+### GitHub Credential Boundary
+
+`npm run auth:github` is the only supported credential bridge for Studio. It
+requires an already authenticated GitHub CLI, resolves its absolute executable
+path, and writes an exact `https://github.com` helper chain to this clone's
+`.git/config`: an empty helper resets inherited chains, followed by the resolved
+`gh auth git-credential` helper. It then proves read access with the same
+sanitized environment used by publishing.
+
+No token is read, printed, or stored in repository files. Global and system Git
+configuration remain disabled, terminal/askpass prompting remains disabled,
+and the helper supplies credentials only; it cannot select the remote, branch,
+or refspec. Setup must remain idempotent, URL-scoped, and fail closed before a
+config change when `gh`, authentication, HTTPS upstream identity, or branch
+binding is invalid. If its final probe fails, it restores the prior local helper
+values.
+
 `Pushed` is not `Deployed`. GitHub Actions remains deployment authority.
 
 ## Maintenance Recipes

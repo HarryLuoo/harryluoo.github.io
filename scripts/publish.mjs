@@ -27,7 +27,7 @@ const isAllowedPath = (path) => path === 'content/site.json'
   || path.startsWith('public/uploads/');
 const isTextPath = (path) => path === 'content/site.json' || path.startsWith('content/articles/');
 
-const sanitizedGitEnvironment = () => {
+export const sanitizedGitEnvironment = () => {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_') && key !== 'SSH_ASKPASS'));
   return {
     ...env,

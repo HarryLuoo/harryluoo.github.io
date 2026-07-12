@@ -13,6 +13,26 @@ npm install
 
 ## Run Modes
 
+### GitHub authentication on a new computer
+
+Studio pushes are intentionally noninteractive. Install the
+[GitHub CLI](https://cli.github.com/), then authenticate once:
+
+```bash
+gh auth login --hostname github.com --git-protocol https --web
+npm run auth:github
+```
+
+Run `npm run auth:github` once in every fresh clone before publishing from
+Studio. It stores no token in the repository. It installs only a
+`github.com`-scoped credential-helper entry in that clone's `.git/config`,
+pointing to the authenticated `gh` executable and its secure credential store.
+
+Ordinary `gh auth setup-git` configures global Git state, which Studio
+deliberately ignores. The repository command creates the narrower clone-local
+bridge that Studio can use while global/system Git configuration and terminal
+prompts remain disabled.
+
 ### Public development
 
 ```bash
@@ -171,12 +191,17 @@ to Publish is a scope boundary, not an error to bypass.
   verification is tied to HEAD, upstream identity, CMS bytes, worktree/index
   state, and ignored CMS paths. Run Verify again after the repository settles.
 - **A push is pending:** leave the repository and upstream binding unchanged
-  and use Retry Push. If either changed, stop and review the Git state outside
-  Studio.
-- **Studio restarted after a failed push:** the pending-push record is
-  process-local. Inspect HEAD and the configured upstream outside Studio, then
-  use the normal reviewed Git workflow instead of recreating Retry Push. A
-  restart also requires a fresh Verify.
+  and use Retry Push. If authentication is missing, run `gh auth login` and
+  `npm run auth:github` in a terminal, then retry the same pending commit. If
+  HEAD, the worktree/index, or upstream changed, stop and review the Git state
+  outside Studio.
+- **GitHub CLI is missing or logged out:** install `gh`, run the two setup
+  commands above, and restart Studio if the helper executable moved. The setup
+  command fails without changing Git configuration when login is invalid.
+- **Studio restarted after a failed committed push:** pending-push state lives
+  only in the Studio API process. Inspect HEAD and its upstream and finish the
+  existing commit through normal reviewed Git; do not click Publish again to
+  manufacture a second commit.
 - **The preview looks old:** run `npm run verify` again, then restart the exact
   production preview command. Do not treat the Studio iframe as production
   evidence.

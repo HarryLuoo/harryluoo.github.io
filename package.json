@@ -8,6 +8,7 @@
     "typecheck": "tsc",
     "verify": "node scripts/verify.mjs",
     "check:content": "vite build --mode validation-probes --outDir /tmp/harry-loop1-validation-probes --emptyOutDir",
+    "auth:github": "node scripts/auth-github.mjs",
     "studio": "node scripts/studio.mjs",
     "preview": "vite preview"
   },

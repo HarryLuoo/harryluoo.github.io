@@ -1,87 +1,199 @@
-# Technical Documentation & Code Structure
+# Architecture And Maintenance Map
 
-This document outlines the architecture, data flow, and component structure of the personal portfolio website.
+`AGENTS.md` is the concise instruction entrypoint. This file is the fuller
+operational map for maintainers and future agents.
 
-## 🛠 Tech Stack
-
-*   **Framework:** React 19 (Client-side rendering).
-*   **Routing:** `react-router-dom` (HashRouter used for GitHub Pages compatibility).
-*   **Styling:** Tailwind CSS (CDN-based for simplicity/portability).
-*   **Math Rendering:** `react-markdown`, `remark-math`, `rehype-katex` (KaTeX).
-*   **Icons:** `lucide-react`.
-*   **CMS:** Python (`tkinter` + `json`).
-
-## 📂 File Structure
+## Non-Negotiable Boundaries
 
 ```text
-/
-├── index.html            # Entry point, Tailwind config, Fonts
-├── index.tsx             # React Root
-├── App.tsx               # Main Layout & Routing
-├── types.ts              # TypeScript Interfaces (Paper, Project, Profile, etc.)
-├── constants.tsx         # Data Aggregator (Imports data.ts)
-├── data.ts               # Generated Data File (Do not edit manually)
-├── data.json             # Source Data File for CMS
-├── cms.py                # Python GUI for editing data.json -> data.ts
-├── components/
-│   ├── Sidebar.tsx       # Responsive Navigation Sidebar
-│   └── MarkdownRenderer.tsx # Renders MD + Math
-├── pages/
-│   ├── Home.tsx          # Bento Grid / Dashboard
-│   ├── Research.tsx      # Academic Paper List
-│   ├── Projects.tsx      # Masonry/Grid Project Cards
-│   └── Garden.tsx        # Blog System (Async Markdown Loader)
-└── posts/                # Directory for Markdown blog files
-    └── *.md
+Canonical structured content    content/site.json
+Canonical Markdown bodies       content/articles/*.md
+Canonical public files          public/uploads/*
+Content schema and validation   src/content/schema.ts
+                                src/content/validate.server.ts
+Public renderer                 src/App.tsx, src/pages/, src/components/
+Studio client                   studio.html, src/studio/
+Studio API                      studio/server.mjs
+Verification                    scripts/verify.mjs
+Production smoke checks         scripts/artifact-smoke.mjs
+Publishing boundary             scripts/publish.mjs
 ```
 
-## 🔄 Data Architecture
+Content can own copy, metadata, ordering, visibility, links, tags, placements,
+and references. It cannot own React component names, CSS classes, arbitrary
+styles, or template layout. Do not introduce a second schema or content
+adapter; `src/content/schema.ts` is the TypeScript authority.
 
-The application uses a **"Disconnected CMS"** pattern to allow dynamic editing without a database.
+## Runtime Modes
 
-1.  **Source of Truth:** `data.json`. This file holds the raw strings, arrays, and paths.
-2.  **The Editor:** `cms.py` reads `data.json`, presents a GUI, and modifies it.
-3.  **The Bridge:** When `cms.py` saves, it writes to `data.json` AND generates `data.ts`.
-    *   *Why?* Browsers/ES Modules often block importing `.json` files directly without specific bundler configs. Generating a `.ts` file that `export default {...}` ensures universal compatibility.
-4.  **The Consumer:** `constants.tsx` imports `data.ts` and maps it to strongly typed interfaces defined in `types.ts`.
-5.  **The View:** React components import constants to render content.
+- `npm start` runs ordinary Vite development on port `8080`. The Vite plugin
+  deliberately returns 404 for `/studio.html` outside Studio mode.
+- `npm run studio` launches strict loopback services: Studio-enabled Vite on
+  `127.0.0.1:8080` and the API on `127.0.0.1:8787`. The launcher stops the
+  sibling if either child exits.
+- `npm run verify` validates, typechecks, builds production once, and checks the
+  generated artifacts.
+- `npm run preview -- --host 127.0.0.1 --port 4173 --strictPort` serves the
+  already verified `dist`. Do not rebuild between verification and an
+  acceptance preview.
 
-## 🧩 Key Components
+`vite.config.ts` validates canonical content during config loading, injects
+default metadata, and emits `robots.txt` and `sitemap.xml`. `HashRouter` owns
+GitHub Pages-safe public routes and fixed missing-entity/recovery states.
 
-### `MarkdownRenderer.tsx`
-A wrapper around `react-markdown`.
-*   **Plugins:** `remark-math` (parses math), `rehype-katex` (renders math).
-*   **Styling:** Uses Tailwind's `@tailwindcss/typography` (prose) equivalent classes manually applied to mapped components (`h1`, `p`, `blockquote`, `code`).
+## Content Loading And Validation
 
-### `pages/Garden.tsx`
-Handles the dual state of "List View" vs "Post View".
-*   **Async Loading:** If a post's `content` field ends in `.md` or starts with `/`, it triggers a `fetch()` request to load the raw text file.
-*   **Fallback:** If the content is simple text, it renders immediately.
+`src/content/loader.ts` parses `content/site.json` with Zod and eagerly bundles
+`content/articles/*.md` as raw strings keyed by filename slug. References are
+semantic slugs, never component or filesystem instructions.
 
-### `cms.py`
-A standalone Python script using `tkinter`.
-*   **Robustness:** Handles missing keys gracefully.
-*   **Tabs:** Home & Hero, Homepage, Profile, Research, Projects, Garden, File Manager, **Tag Manager (New)**, Post Editor.
-*   **Typography & Content Controls:**
-    *   **Home & Hero:** Exposes dual font selectors and size class overrides for headline/subheadline.
-    *   **Homepage:** Allows editing the "Projects" card text (e.g., "Fun projects that I do").
-    *   **Research Tab:** Includes a top-level "Page Settings" text area to edit the Research page introduction text.
-*   **Tag Manager:** A centralized list of tags (global) that can be selected via a multi-select dialog in paper, project, and post forms. This prevents typos and ensures tag consistency.
-*   **IO:** Writes UTF-8 encoded files.
+`validateProjectContent` rejects extra schema keys, unsafe paths, duplicate
+slugs/navigation/social identities, unknown tags, invisible or missing Home
+placements, missing article files, and missing referenced uploads. Keep new
+fields strict and add reference checks when a field can point at another entity
+or file.
 
-## 🎨 Design System
+Public uploads must use safe root-relative `/uploads/...` paths. Studio accepts
+only PDF, PNG, JPEG, and WebP uploads with safe names, bounded decoded size, and
+a file signature matching the extension.
 
-The design follows a "Swiss Style / Academic" aesthetic.
-*   **Typography:** High contrast. Large Serif headers (Cinzel) paired with clean Serif/Sans body (Palatino).
-*   **Layout:**
-    *   **Desktop:** Fixed left sidebar (320px), scrollable main content.
-    *   **Mobile:** Fixed top header, collapsible sidebar menu.
-*   **Responsiveness:**
-    *   `Home.tsx` uses complex grid logic (`col-span-12`, `lg:col-span-8`) to create the Bento layout.
-    *   Specific attention paid to `flex-col` vs `flex-row` switching on the "Featured" card for tablet breakpoints.
+## Studio Write Model
 
-## ⚠️ Maintenance Notes
+The Studio iframe renders saved public state only. Unsaved structured edits,
+article edits, and upload changes stay in their editors until saved.
 
-1.  **Race Conditions:** There are none, as this is a static site.
-2.  **Images:** Currently assumes external URLs (e.g., `picsum.photos` or hosted assets). If local images are needed, they should be placed in an `assets/` folder and referenced relatively.
-3.  **PDFs:** Linked via the CMS. For GitHub Pages, ensure PDFs are in the `public` or root directory so relative paths work.
+`studio/server.mjs` is the sole Studio writer. Mutating requests require the
+exact `http://127.0.0.1:8080` Origin, exact bounded JSON shapes, safe path
+segments, and current SHA-256 revisions. A single promise queue serializes all
+mutations. Replacements write a same-directory temporary file, sync it, and
+rename it atomically.
+
+Revision mismatches return HTTP 409 and must be resolved by reloading and
+reconciling, never by blind overwrite. Deletes re-read canonical usage and
+reject referenced articles or uploads. Each implemented operation changes one
+file, so there is no multi-file recovery record.
+
+Any successful Studio save invalidates the in-memory verification token.
+Verification and pending-push state also live only in the running API process.
+
+## Verify Contract
+
+`scripts/verify.mjs` is the single local and CI acceptance command:
+
+1. Load and validate the canonical authority.
+2. Run TypeScript with the repository compiler.
+3. Run one Vite production build.
+4. Smoke-check that exact `dist`.
+
+The artifact check requires the expected public entry assets, exact copies of
+every referenced upload, all visible route/entity markers, bundled article
+markers, recovery markers, default metadata, `robots.txt`, and `sitemap.xml`.
+It rejects emitted Markdown, raw `content/site.json`, Studio HTML, and Studio/API
+markers in the production bundle.
+
+Run `npm run verify` after every content, code, style, dependency,
+configuration, or test change. A narrower command may help diagnose a failure,
+but it does not replace Verify before handoff or publication.
+
+## Publish Contract
+
+Studio Publish is content-only. `scripts/publish.mjs` allows exactly:
+
+```text
+content/site.json
+content/articles/**
+public/uploads/**
+```
+
+Publish status parses complete NUL-delimited porcelain-v2 Git state. It blocks
+unrelated paths, any pre-existing staged state, unmerged or unsupported
+submodule state, ignored files in CMS roots, missing branch/upstream identity,
+unsafe CMS file types/nesting, and truncated review output.
+
+The verification fingerprint binds HEAD, branch/upstream destination and URLs,
+all CMS file bytes/deletions, raw worktree/index state, and ignored CMS paths.
+Publish rechecks the fingerprint, the displayed diff fingerprint, blockers,
+the allowlist, and staged blob identity before committing.
+
+Git commands use fixed arguments without a shell, ignore local hooks, suppress
+signing, sanitize inherited Git/askpass redirection, and push explicitly to the
+verified remote name and merge ref. Studio creates at most one commit per
+Publish. After a failed push, the API's in-memory pending record binds the
+commit SHA to its branch, upstream identity, fetch/push URLs, merge ref, and
+failure detail; the public Studio status exposes only the SHA. Retry Push
+revalidates that bound state and sends the exact commit without staging or
+committing again.
+
+### Grey Publish Button
+
+The button is intentionally `aria-disabled`, not natively disabled, so it stays
+hoverable and keyboard-focusable. Hover or focus reveals the **Before
+publishing** tooltip. Its checklist is derived from live state:
+
+- current operation finished;
+- no pending push;
+- verification fresh;
+- no Publish readiness blockers;
+- at least one CMS change;
+- complete, non-truncated diff;
+- review checkbox checked;
+- non-empty commit message.
+
+The click handler is a no-op until all conditions pass, and the API repeats the
+security and freshness checks. Do not change this to a cosmetic-only disabled
+state or weaken the server checks to match UI behavior.
+
+`Pushed` is not `Deployed`. GitHub Actions remains deployment authority.
+
+## Maintenance Recipes
+
+For content-only changes:
+
+1. Start Studio and save the intended canonical edits.
+2. Review the CMS path list, upload summary, and complete text diff.
+3. Verify, confirm the diff, Publish, and use Retry Push only if offered.
+
+For code, CSS, dependencies, config, tests, docs, legacy retirement, or mixed
+changes:
+
+1. Work outside Studio and preserve unrelated user changes.
+2. Review the scoped diff and run `npm run verify`.
+3. Inspect the unchanged verified production preview when behavior or visuals
+   changed.
+4. Commit and push through normal review, never Studio.
+
+When adding a content field, update the schema, validator/reference collection,
+Studio editor/types, public selector/template, metadata behavior if relevant,
+and Verify artifact expectations. Keep one owner for every value.
+
+## Troubleshooting And Recovery
+
+- Port collision: Studio ports are fixed; stop the existing listener and
+  restart the launcher rather than silently choosing another port.
+- Save conflict: reload the snapshot, inspect the disk change, and reapply the
+  intended edit. Do not bypass revisions.
+- Grey Publish: hover/focus the button, resolve every checklist item, refresh
+  status, and rerun Verify after repository changes.
+- Stale verification: expected after any save or fingerprint-changing Git
+  state. Run Verify again only after the repository is settled.
+- Pending push: use Retry Push without changing HEAD, the worktree/index, or
+  upstream binding. If they changed, stop and use normal Git review.
+- CI/deployment: `.github/workflows/deploy.yml` uses Node 20, `npm ci`, the same
+  Verify command, and uploads its existing `dist` before GitHub Pages deploys.
+
+## Pre-Retirement Legacy
+
+The active entry is `index.tsx -> ./src/App`. Root `App.tsx`, `constants.tsx`,
+`types.ts`, `data.ts`, `data.json`, `cms.py`, `metadata.json`, `components/`,
+`pages/`, and `posts/` are inactive rollback material, not a second authority.
+Do not edit or delete them without explicit user-approved retirement.
+
+While the complete legacy tree and dependencies remain, the bounded emergency
+rollback is the single `index.tsx` import switch to root `./App`. It serves the
+older legacy snapshot, not newer canonical content. Verify and preview before
+any push.
+
+After a reviewed retirement commit, rollback with a reviewed
+`git revert <reviewed-cutover-commit>`, then Verify and preview. Do not reset or
+manually reconstruct a partial legacy tree. Preserve reconstruction,
+investigation, handoff, and design documents as historical evidence.

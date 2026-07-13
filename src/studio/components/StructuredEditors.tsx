@@ -63,7 +63,7 @@ export const ShellEditor = ({ value, baseline, uploads, update }: EditorProps) =
         <Field label="ID" hint={existingNav.has(item.id) ? 'Immutable' : undefined}><TextInput value={item.id} disabled={existingNav.has(item.id)} onChange={(v) => update((d) => { d.shell.navigation[index].id = v; })} /></Field>
         <Field label="Label"><TextInput value={item.label} onChange={(v) => update((d) => { d.shell.navigation[index].label = v; })} /></Field>
         <Field label="Kind"><Select value={item.kind} onChange={(kind) => update((d) => { const current = d.shell.navigation[index]; delete current.route; delete current.href; current.kind = kind; if (kind === 'internal') current.route = '/'; if (kind === 'external') current.href = 'https://example.com'; })}><option value="internal">Internal</option><option value="external">External</option><option value="cv">Shared CV</option></Select></Field>
-        {item.kind === 'internal' && <Field label="Route"><Select value={item.route} onChange={(v) => update((d) => { d.shell.navigation[index].route = v; })}>{['/', '/research', '/projects', '/garden'].map((route) => <option key={route}>{route}</option>)}</Select></Field>}
+        {item.kind === 'internal' && <Field label="Route"><Select value={item.route} onChange={(v) => update((d) => { d.shell.navigation[index].route = v; })}>{['/', '/about', '/research', '/projects', '/garden'].map((route) => <option key={route}>{route}</option>)}</Select></Field>}
         {item.kind === 'external' && <Field label="URL"><TextInput value={item.href} onChange={(v) => update((d) => { d.shell.navigation[index].href = v; })} /></Field>}
         <Checkbox label="Visible" checked={item.visible} onChange={(v) => update((d) => { d.shell.navigation[index].visible = v; })} />
       </div><OrderButtons index={index} length={value.shell.navigation.length} onMove={(delta) => update((d) => move(d.shell.navigation, index, delta))} onRemove={() => update((d) => remove(d.shell.navigation, index))} /></fieldset>)}
@@ -84,6 +84,51 @@ export const HomeEditor = ({ value, uploads, update }: EditorProps) => <div clas
   <section><h2>Featured</h2><div className="field-grid"><Field label="Type"><Select value={value.home.featured.entityType} onChange={(v) => update((d) => { d.home.featured.entityType = v; d.home.featured.slug = entityOptions(d, v)[0]?.slug || ''; })}><option value="paper">Paper</option><option value="project">Project</option><option value="post">Post</option></Select></Field><Field label="Entity"><Select value={value.home.featured.slug} onChange={(v) => update((d) => { d.home.featured.slug = v; })}>{entityOptions(value, value.home.featured.entityType).map((item) => <option key={item.slug} value={item.slug}>{item.title}</option>)}</Select></Field><AssetSelect value={value.home.featured.imageOverrideUpload} uploads={uploads} allowPdf={false} label="Image override" onChange={(v) => update((d) => optional(d.home.featured, 'imageOverrideUpload', v))} /><Checkbox label="Visible" checked={value.home.featured.visible} onChange={(v) => update((d) => { d.home.featured.visible = v; })} /></div></section>
   <section><h2>Teasers</h2><div className="field-grid"><Field label="Projects description" wide><TextArea value={value.home.projectsDescription} onChange={(v) => update((d) => { d.home.projectsDescription = v; })} /></Field><Field label="Garden description" wide><TextArea value={value.home.gardenDescription} onChange={(v) => update((d) => { d.home.gardenDescription = v; })} /></Field></div></section>
 </div>;
+
+type AboutSectionKey = 'background' | 'currentWork';
+
+const wordCount = (value: string) => value.trim() ? value.trim().split(/\s+/).length : 0;
+
+const AboutSectionEditor = ({ sectionKey, label, value, uploads, update }: EditorProps & { sectionKey: AboutSectionKey; label: string }) => {
+  const section = value.about[sectionKey];
+  const imageUploads = uploads.filter((upload) => /\.(?:png|jpe?g|webp)$/i.test(upload.name));
+  return <section>
+    <h2>{label}</h2>
+    <Field label="Text" wide><TextArea rows={7} value={section.text} onChange={(v) => update((d) => { d.about[sectionKey].text = v; })} /></Field>
+    <div className="section-heading">
+      <h3>Margin figures</h3>
+      <button
+        type="button"
+        disabled={section.figures.length >= 2 || imageUploads.length === 0}
+        title={imageUploads.length === 0 ? 'Upload a PNG, JPEG, or WebP image first' : undefined}
+        onClick={() => update((d) => d.about[sectionKey].figures.push({ upload: imageUploads[0].path, alt: '' }))}
+      >Add figure</button>
+    </div>
+    {imageUploads.length === 0 && <p className="muted">Upload a PNG, JPEG, or WebP image before adding a figure.</p>}
+    {section.figures.map((figure, index) => <fieldset key={`${figure.upload}-${index}`}>
+      <legend>Figure {index + 1}</legend>
+      <div className="field-grid">
+        <AssetSelect value={figure.upload} uploads={imageUploads} allowPdf={false} label="Image" onChange={(v) => update((d) => { if (v) d.about[sectionKey].figures[index].upload = v; })} />
+        <Field label="Alternative text"><TextInput value={figure.alt} onChange={(v) => update((d) => { d.about[sectionKey].figures[index].alt = v; })} /></Field>
+        <Field label="Caption" wide><TextInput value={figure.caption || ''} onChange={(v) => update((d) => optional(d.about[sectionKey].figures[index], 'caption', v))} /></Field>
+      </div>
+      <OrderButtons index={index} length={section.figures.length} onMove={(delta) => update((d) => movePlain(d.about[sectionKey].figures, index, delta))} onRemove={() => update((d) => d.about[sectionKey].figures.splice(index, 1))} />
+    </fieldset>)}
+  </section>;
+};
+
+export const AboutEditor = (props: EditorProps) => {
+  const words = wordCount(props.value.about.background.text) + wordCount(props.value.about.currentWork.text);
+  const outsideRange = words < 150 || words > 250;
+  return <div className="editor-stack">
+    <section>
+      <h2>About page</h2>
+      <p className={outsideRange ? 'warning' : 'muted'}>{words} words{outsideRange ? ' (recommended: 150-250)' : ''}</p>
+    </section>
+    <AboutSectionEditor {...props} sectionKey="background" label="Background" />
+    <AboutSectionEditor {...props} sectionKey="currentWork" label="Current Work" />
+  </div>;
+};
 
 const SlugField = ({ slug, existing, onChange }: { slug: string; existing: boolean; onChange: (value: string) => void }) => <Field label="Slug" hint={existing ? 'Immutable' : 'Set once'}><TextInput value={slug} disabled={existing} onChange={onChange} /></Field>;
 

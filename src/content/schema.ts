@@ -19,6 +19,10 @@ const uploadPath = z.string().refine(
   },
   { message: 'Use a safe root-relative /uploads/... path' },
 );
+const imageUploadPath = uploadPath.refine(
+  (value) => /\.(?:png|jpe?g|webp)$/i.test(value),
+  { message: 'Use a PNG, JPEG, or WebP upload' },
+);
 
 const tagList = z.array(z.string().min(1));
 const entityType = z.enum(['paper', 'project', 'post']);
@@ -57,7 +61,7 @@ const navigationSchema = z.discriminatedUnion('kind', [
     id: slug,
     label: z.string().min(1),
     kind: z.literal('internal'),
-    route: z.enum(['/', '/research', '/projects', '/garden']),
+    route: z.enum(['/', '/about', '/research', '/projects', '/garden']),
     ...visibility,
   }),
   z.strictObject({
@@ -126,6 +130,17 @@ const homeSchema = z.strictObject({
   gardenDescription: z.string().min(1),
 });
 
+const aboutFigureSchema = z.strictObject({
+  upload: imageUploadPath,
+  alt: z.string().trim().min(1),
+  caption: z.string().trim().min(1).optional(),
+});
+
+const aboutSectionSchema = z.strictObject({
+  text: z.string().min(1),
+  figures: z.array(aboutFigureSchema).max(2),
+});
+
 const paperSchema = z.strictObject({
   slug,
   title: z.string().min(1),
@@ -170,6 +185,10 @@ export const siteSchema = z.strictObject({
   seo: seoSchema,
   shell: shellSchema,
   home: homeSchema,
+  about: z.strictObject({
+    background: aboutSectionSchema,
+    currentWork: aboutSectionSchema,
+  }),
   research: z.strictObject({
     description: z.string().min(1),
     papers: z.array(paperSchema),
@@ -188,4 +207,5 @@ export type SiteContent = z.infer<typeof siteSchema>;
 export type Paper = SiteContent['research']['papers'][number];
 export type Project = SiteContent['projects']['items'][number];
 export type Post = SiteContent['garden']['posts'][number];
+export type AboutSection = SiteContent['about']['background'];
 export type EntityType = z.infer<typeof entityType>;

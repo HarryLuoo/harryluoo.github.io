@@ -201,6 +201,8 @@ const uploadUsage = (site, path) => {
   add(site.seo.socialImageUpload, 'SEO', null, 'socialImageUpload', 'Social image');
   add(site.home.featured.imageOverrideUpload, 'Home', null, 'featured.imageOverrideUpload', 'Featured image');
   site.home.recent.manualEntries.forEach((item, index) => add(item.imageUpload, 'Home', null, `recent.manualEntries.${index}.imageUpload`, item.title));
+  site.about.background.figures.forEach((item, index) => add(item.upload, 'About', null, `background.figures.${index}.upload`, `Background figure ${index + 1}`));
+  site.about.currentWork.figures.forEach((item, index) => add(item.upload, 'About', null, `currentWork.figures.${index}.upload`, `Current Work figure ${index + 1}`));
   site.research.papers.forEach((item) => add(item.pdfUpload, 'Research', item.slug, 'pdfUpload', item.title));
   site.projects.items.forEach((item) => add(item.imageUpload, 'Projects', item.slug, 'imageUpload', item.title));
   site.garden.posts.forEach((item) => add(item.pdfUpload, 'Garden', item.slug, 'pdfUpload', item.title));

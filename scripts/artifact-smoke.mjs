@@ -99,6 +99,10 @@ export const smokeArtifacts = async (projectRoot, site, discovery) => {
     }
   }
 
+  for (const marker of ['/about', site.about.background.text, site.about.currentWork.text]) {
+    if (!bundleText.includes(marker)) fail(`Built bundle is missing About marker: ${marker}`);
+  }
+
   const articleRoot = join(projectRoot, 'content', 'articles');
   const articleNames = (await readdir(articleRoot)).filter((name) => name.endsWith('.md')).sort();
   if (articleNames.length !== 2) fail(`Expected two canonical articles, found ${articleNames.length}`);

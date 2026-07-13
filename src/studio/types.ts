@@ -41,4 +41,4 @@ export interface PublishStatus {
   pendingPush: { commitSha: string } | null;
 }
 
-export type StudioArea = 'Shell' | 'Home' | 'Research' | 'Projects' | 'Garden' | 'Articles' | 'Uploads' | 'SEO' | 'Verify/Publish';
+export type StudioArea = 'Shell' | 'Home' | 'About' | 'Research' | 'Projects' | 'Garden' | 'Articles' | 'Uploads' | 'SEO' | 'Verify/Publish';

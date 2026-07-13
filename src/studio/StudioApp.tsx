@@ -2,13 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { SiteContent } from '../content/schema';
 import { ApiError, studioApi } from './api';
 import { ArticlesEditor } from './components/ArticlesEditor';
-import { GardenEditor, HomeEditor, ProjectsEditor, ResearchEditor, SeoEditor, ShellEditor } from './components/StructuredEditors';
+import { AboutEditor, GardenEditor, HomeEditor, ProjectsEditor, ResearchEditor, SeoEditor, ShellEditor } from './components/StructuredEditors';
 import { UploadsEditor } from './components/UploadsEditor';
 import { PublishEditor } from './components/PublishEditor';
 import type { StudioArea, StudioSnapshot } from './types';
 
-const areas: StudioArea[] = ['Shell', 'Home', 'Research', 'Projects', 'Garden', 'Articles', 'Uploads', 'SEO', 'Verify/Publish'];
-const structuredAreas = new Set<StudioArea>(['Shell', 'Home', 'Research', 'Projects', 'Garden', 'SEO']);
+const areas: StudioArea[] = ['Shell', 'Home', 'About', 'Research', 'Projects', 'Garden', 'Articles', 'Uploads', 'SEO', 'Verify/Publish'];
+const structuredAreas = new Set<StudioArea>(['Shell', 'Home', 'About', 'Research', 'Projects', 'Garden', 'SEO']);
 const clone = <T,>(value: T): T => structuredClone(value);
 
 const StudioApp = () => {
@@ -88,13 +88,14 @@ const StudioApp = () => {
   const editorProps = { value: draft, baseline: snapshot.site.content, articles: snapshot.articles, uploads: snapshot.uploads, update };
   const editor = area === 'Shell' ? <ShellEditor {...editorProps} />
     : area === 'Home' ? <HomeEditor {...editorProps} />
-      : area === 'Research' ? <ResearchEditor {...editorProps} />
-        : area === 'Projects' ? <ProjectsEditor {...editorProps} />
-          : area === 'Garden' ? <GardenEditor {...editorProps} />
-            : area === 'SEO' ? <SeoEditor {...editorProps} />
-              : area === 'Articles' ? <ArticlesEditor articles={snapshot.articles} onRefresh={loadSnapshot} onDirtyChange={setArticleDirty} discardSignal={discardSignal} />
-                : area === 'Uploads' ? <UploadsEditor uploads={snapshot.uploads} onRefresh={loadSnapshot} onDirtyChange={setUploadDirty} discardSignal={discardSignal} />
-                  : <PublishEditor />;
+      : area === 'About' ? <AboutEditor {...editorProps} />
+        : area === 'Research' ? <ResearchEditor {...editorProps} />
+          : area === 'Projects' ? <ProjectsEditor {...editorProps} />
+            : area === 'Garden' ? <GardenEditor {...editorProps} />
+              : area === 'SEO' ? <SeoEditor {...editorProps} />
+                : area === 'Articles' ? <ArticlesEditor articles={snapshot.articles} onRefresh={loadSnapshot} onDirtyChange={setArticleDirty} discardSignal={discardSignal} />
+                  : area === 'Uploads' ? <UploadsEditor uploads={snapshot.uploads} onRefresh={loadSnapshot} onDirtyChange={setUploadDirty} discardSignal={discardSignal} />
+                    : <PublishEditor />;
 
   return <div className="studio-shell">
     <header className="studio-header"><div><h1>Portfolio Studio</h1><p>Local saved-disk editor</p></div><div className={`save-state ${dirty ? 'dirty' : ''}`} aria-live="polite"><span>{dirty ? 'Unsaved' : 'Saved'}</span><small>{status}</small></div></header>

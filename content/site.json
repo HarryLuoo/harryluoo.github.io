@@ -3,7 +3,7 @@
     "siteUrl": "https://harryluoo.github.io",
     "defaultTitle": "子根斋",
     "titleSuffix": "G. Z. Luo",
-    "defaultDescription": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
+    "defaultDescription": "Incoming Ph.D. student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
     "openGraph": {
       "siteName": "G. Z. Luo",
       "type": "website"
@@ -19,9 +19,9 @@
   "shell": {
     "profile": {
       "name": "Guizhong (Harry) Luo",
-      "role": "PhD Student",
+      "role": "Incoming Ph.D. Student",
       "affiliation": "University of Minnesota Twin Cities",
-      "bio": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
+      "bio": "Incoming Ph.D. student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics.",
       "showBio": false,
       "email": "luo00309@umn.edu"
     },
@@ -50,12 +50,20 @@
         "order": 0
       },
       {
+        "id": "about",
+        "label": "ABOUT",
+        "kind": "internal",
+        "route": "/about",
+        "visible": true,
+        "order": 1
+      },
+      {
         "id": "research",
         "label": "RESEARCH",
         "kind": "internal",
         "route": "/research",
         "visible": true,
-        "order": 1
+        "order": 2
       },
       {
         "id": "projects",
@@ -63,7 +71,7 @@
         "kind": "internal",
         "route": "/projects",
         "visible": true,
-        "order": 2
+        "order": 3
       },
       {
         "id": "garden",
@@ -71,21 +79,21 @@
         "kind": "internal",
         "route": "/garden",
         "visible": true,
-        "order": 3
+        "order": 4
       },
       {
         "id": "cv",
         "label": "CV",
         "kind": "cv",
         "visible": true,
-        "order": 4
+        "order": 5
       }
     ]
   },
   "home": {
     "hero": {
       "headline": "Harry Luo",
-      "subheadline": "PhD student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics."
+      "subheadline": "Incoming Ph.D. student in Electrical Engineering at the University of Minnesota, working in computational condensed matter physics."
     },
     "recent": {
       "mode": "manual",
@@ -95,7 +103,7 @@
         {
           "title": "PhD Study at the University of Minnesota",
           "dateLabel": "08-2026",
-          "description": "Began doctoral study in Electrical Engineering with the Low Group, focusing on computational condensed matter physics.",
+          "description": "Will begin doctoral study in Electrical Engineering with the Low Group, focusing on computational condensed matter physics.",
           "visible": true,
           "order": 0
         },
@@ -122,6 +130,16 @@
     },
     "projectsDescription": "Selected computational and scientific projects.",
     "gardenDescription": "Notes, derivations, and technical writing."
+  },
+  "about": {
+    "background": {
+      "text": "I will begin a Ph.D. in Electrical Engineering at the University of Minnesota Twin Cities in August 2026, working with Tony Low in computational condensed matter. I completed my undergraduate studies at the University of Wisconsin-Madison through the Applied Mathematics, Engineering and Physics program, with additional training in mathematics and physics. My research there focused on quantum information science, including open-system simulation and quantum error mitigation for bosonic codes.",
+      "figures": []
+    },
+    "currentWork": {
+      "text": "I am currently finishing work on finite-energy Gottesman-Kitaev-Preskill codes under photon-loss noise. The project asks whether code energy can serve as a controlled scaling parameter for zero-noise extrapolation and how recovery and decoding affect the resulting logical observables. During this work, I have been interested in the connection between physical noise models, encoded states, and quantities that can be recovered numerically. As I move into condensed matter, I am beginning to study how band geometry and symmetry shape measurable responses in quantum materials. These directions remain exploratory and will narrow as my doctoral project develops.",
+      "figures": []
+    }
   },
   "research": {
     "description": "My research spans computational condensed matter physics, quantum information science, and numerical methods for quantum systems.",

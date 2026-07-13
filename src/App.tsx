@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import RecoveryState from './components/content/RecoveryState';
 import Sidebar from './components/layout/Sidebar';
 import SiteMetadata from './components/layout/SiteMetadata';
+import About from './pages/About';
 import { GardenDetail, GardenList } from './pages/Garden';
 import Home from './pages/Home';
 import { ProjectDetail, ProjectsList } from './pages/Projects';
@@ -22,6 +23,7 @@ const PublicRoutes = () => (
     <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 pt-16 md:pt-0 md:ml-80">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/research" element={<ResearchList />} />
         <Route path="/research/:slug" element={<ResearchDetail />} />
         <Route path="/projects" element={<ProjectsList />} />

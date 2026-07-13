@@ -39,6 +39,8 @@ const collectUploadReferences = (site: any) => {
     site.seo.socialImageUpload,
     site.home.featured.imageOverrideUpload,
     ...site.home.recent.manualEntries.map((entry: any) => entry.imageUpload),
+    ...site.about.background.figures.map((figure: any) => figure.upload),
+    ...site.about.currentWork.figures.map((figure: any) => figure.upload),
     ...site.research.papers.map((paper: any) => paper.pdfUpload),
     ...site.projects.items.map((project: any) => project.imageUpload),
     ...site.garden.posts.map((post: any) => post.pdfUpload),
@@ -157,6 +159,14 @@ export const runValidationProbes = (projectRoot: string) => {
     {
       name: 'missing-upload',
       mutate: (site: any) => { site.shell.cvUpload = '/uploads/missing-cv.pdf'; },
+    },
+    {
+      name: 'about-figure-not-image',
+      mutate: (site: any) => { site.about.background.figures.push({ upload: site.shell.cvUpload, alt: 'CV is not an image' }); },
+    },
+    {
+      name: 'missing-about-figure',
+      mutate: (site: any) => { site.about.background.figures.push({ upload: '/uploads/missing-figure.png', alt: 'Missing test figure' }); },
     },
   ];
 

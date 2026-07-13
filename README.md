@@ -90,6 +90,7 @@ Public routes use `HashRouter`:
 
 ```text
 #/
+#/about
 #/research
 #/research/:slug
 #/projects
@@ -102,9 +103,9 @@ Unknown routes and missing entities render code-owned recovery states.
 
 ## Editing In Studio
 
-The Studio has Shell, Home, Research, Projects, Garden, Articles, Uploads, SEO,
-and Verify/Publish areas. Structured saves validate the complete candidate.
-Article and upload operations affect one file at a time.
+The Studio has Shell, Home, About, Research, Projects, Garden, Articles,
+Uploads, SEO, and Verify/Publish areas. Structured saves validate the complete
+candidate. Article and upload operations affect one file at a time.
 
 Every mutation:
 

@@ -3,12 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import MarkdownRenderer from '../components/content/MarkdownRenderer';
 import RecoveryState from '../components/content/RecoveryState';
 import TagList from '../components/content/TagList';
-import { articleFor, site } from '../content/loader';
+import { articleFor } from '../content/loader';
 import { findProject, projects } from '../content/selectors';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 
 export const ProjectsList = () => {
-  useDocumentMeta('Projects', site.home.projectsDescription, '/projects');
+  useDocumentMeta('Projects', 'Selected computational and scientific projects.', '/projects');
   return (
     <div className="min-h-screen p-8 md:p-16 lg:p-24 max-w-7xl mx-auto min-w-0">
       <header className="mb-16"><h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 break-words">Projects</h1><div className="w-20 h-1 bg-academic-orange" /></header>

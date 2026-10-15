@@ -25,6 +25,7 @@ const imageUploadPath = uploadPath.refine(
 );
 
 const tagList = z.array(z.string().min(1));
+const monthDate = z.string().regex(/^\d{4}-(?:0[1-9]|1[0-2])$/, 'Use YYYY-MM');
 const entityType = z.enum(['paper', 'project', 'post']);
 const entityPlacement = z.strictObject({
   entityType,
@@ -61,7 +62,7 @@ const navigationSchema = z.discriminatedUnion('kind', [
     id: slug,
     label: z.string().min(1),
     kind: z.literal('internal'),
-    route: z.enum(['/', '/about', '/research', '/projects', '/garden']),
+    route: z.enum(['/', '/about', '/research', '/projects', '/notes']),
     ...visibility,
   }),
   z.strictObject({
@@ -99,35 +100,23 @@ const shellSchema = z.strictObject({
 
 const optionalContentLink = z.union([
   externalUrl,
-  z.string().regex(/^\/(?:research|projects|garden)(?:\/[a-z0-9-]+)?$/),
+  z.string().regex(/^\/(?:research|projects|notes)(?:\/[a-z0-9-]+)?$/),
 ]);
 
 const homeSchema = z.strictObject({
   hero: z.strictObject({
     headline: z.string().min(1),
     subheadline: z.string().min(1),
+    note: z.string().min(1).optional(),
   }),
   recent: z.strictObject({
-    mode: z.enum(['manual', 'auto']),
-    autoLimit: z.number().int().positive(),
-    automaticEntries: z.array(entityPlacement),
-    manualEntries: z.array(z.strictObject({
-      title: z.string().min(1),
-      dateLabel: z.string().optional(),
-      description: z.string().min(1),
-      link: optionalContentLink.optional(),
-      ctaLabel: z.string().min(1).optional(),
-      imageUpload: uploadPath.optional(),
-      ...visibility,
-    })),
+    limit: z.number().int().positive(),
   }),
   featured: z.strictObject({
     ...entityPlacement.shape,
     imageOverrideUpload: uploadPath.optional(),
     visible: z.boolean(),
   }),
-  projectsDescription: z.string().min(1),
-  gardenDescription: z.string().min(1),
 });
 
 const aboutFigureSchema = z.strictObject({
@@ -139,6 +128,14 @@ const aboutFigureSchema = z.strictObject({
 const aboutSectionSchema = z.strictObject({
   text: z.string().min(1),
   figures: z.array(aboutFigureSchema).max(2),
+});
+
+const newsEntrySchema = z.strictObject({
+  title: z.string().min(1),
+  date: monthDate,
+  description: z.string().min(1),
+  link: optionalContentLink.optional(),
+  visible: z.boolean(),
 });
 
 const paperSchema = z.strictObject({
@@ -155,6 +152,7 @@ const paperSchema = z.strictObject({
   bibtexVisible: z.boolean(),
   bibtex: z.string().min(1).optional(),
   articleSlug: slug.optional(),
+  updated: monthDate.optional(),
   ...visibility,
 });
 
@@ -167,6 +165,7 @@ const projectSchema = z.strictObject({
   repositoryUrl: externalUrl.optional(),
   liveUrl: externalUrl.optional(),
   articleSlug: slug.optional(),
+  updated: monthDate.optional(),
   ...visibility,
 });
 
@@ -178,6 +177,7 @@ const postSchema = z.strictObject({
   tags: tagList,
   articleSlug: slug.optional(),
   pdfUpload: uploadPath.optional(),
+  updated: monthDate.optional(),
   ...visibility,
 });
 
@@ -187,7 +187,8 @@ export const siteSchema = z.strictObject({
   home: homeSchema,
   about: z.strictObject({
     background: aboutSectionSchema,
-    currentWork: aboutSectionSchema,
+    interests: aboutSectionSchema,
+    news: z.array(newsEntrySchema),
   }),
   research: z.strictObject({
     description: z.string().min(1),
@@ -196,7 +197,7 @@ export const siteSchema = z.strictObject({
   projects: z.strictObject({
     items: z.array(projectSchema),
   }),
-  garden: z.strictObject({
+  notes: z.strictObject({
     description: z.string().min(1),
     posts: z.array(postSchema),
   }),
@@ -206,6 +207,7 @@ export const siteSchema = z.strictObject({
 export type SiteContent = z.infer<typeof siteSchema>;
 export type Paper = SiteContent['research']['papers'][number];
 export type Project = SiteContent['projects']['items'][number];
-export type Post = SiteContent['garden']['posts'][number];
+export type Post = SiteContent['notes']['posts'][number];
 export type AboutSection = SiteContent['about']['background'];
+export type NewsEntry = SiteContent['about']['news'][number];
 export type EntityType = z.infer<typeof entityType>;

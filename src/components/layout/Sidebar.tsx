@@ -148,7 +148,7 @@ const Sidebar = () => {
               })}
               <a href={`mailto:${profile.email}`} aria-label="email" className="hover:text-academic-orange transition-colors"><Mail aria-hidden="true" size={18} /></a>
             </div>
-            <div className="mt-8 text-[10px] text-stone-700 font-mono">&copy; {new Date().getFullYear()} {profile.name}</div>
+            <div className="mt-8 text-[10px] text-stone-500 font-mono">&copy; {new Date().getFullYear()} {profile.name}</div>
           </div>
         </div>
       </aside>

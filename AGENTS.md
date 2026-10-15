@@ -99,8 +99,3 @@ whether anything was committed, pushed, or deployed. State any unrun check or
 remaining risk plainly. Do not leave required servers or command sessions in an
 unknown state.
 
-Pre-retirement caution: the active renderer is `index.tsx -> src/App.tsx`.
-Legacy root renderer/data/CMS files remain rollback-only material. Do not edit,
-delete, or treat them as a second authority without explicit user-approved
-retirement. See `docs/reconstruction/current.md` for the current acceptance
-state.

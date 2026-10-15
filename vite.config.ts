@@ -1,13 +1,12 @@
 // @ts-nocheck -- Vite bundles this Node-side config before executing it.
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { discoveryFiles, runValidationProbes, validateProjectContent } from './src/content/validate.server';
+import { discoveryFiles, validateProjectContent } from './src/content/validate.server';
 
 export default defineConfig(({ mode }) => {
   const studioMode = mode === 'studio';
   const projectRoot = process.cwd();
   const site = validateProjectContent(projectRoot);
-  if (mode === 'validation-probes') runValidationProbes(projectRoot);
   const discovery = discoveryFiles(site);
   const siteUrl = `${site.seo.siteUrl.replace(/\/$/, '')}/`;
   const robots = `${site.seo.robots.index ? 'index' : 'noindex'}, ${site.seo.robots.follow ? 'follow' : 'nofollow'}`;

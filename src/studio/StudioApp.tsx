@@ -2,13 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { SiteContent } from '../content/schema';
 import { ApiError, studioApi } from './api';
 import { ArticlesEditor } from './components/ArticlesEditor';
-import { AboutEditor, GardenEditor, HomeEditor, ProjectsEditor, ResearchEditor, SeoEditor, ShellEditor } from './components/StructuredEditors';
+import { AboutEditor, NotesEditor, HomeEditor, ProjectsEditor, ResearchEditor, SeoEditor, ShellEditor } from './components/StructuredEditors';
 import { UploadsEditor } from './components/UploadsEditor';
 import { PublishEditor } from './components/PublishEditor';
 import type { StudioArea, StudioSnapshot } from './types';
 
-const areas: StudioArea[] = ['Shell', 'Home', 'About', 'Research', 'Projects', 'Garden', 'Articles', 'Uploads', 'SEO', 'Verify/Publish'];
-const structuredAreas = new Set<StudioArea>(['Shell', 'Home', 'About', 'Research', 'Projects', 'Garden', 'SEO']);
+const areas: StudioArea[] = ['Shell', 'Home', 'About', 'Research', 'Projects', 'Notes', 'Articles', 'Uploads', 'SEO', 'Verify/Publish'];
+const structuredAreas = new Set<StudioArea>(['Shell', 'Home', 'About', 'Research', 'Projects', 'Notes', 'SEO']);
 const clone = <T,>(value: T): T => structuredClone(value);
 
 const StudioApp = () => {
@@ -91,7 +91,7 @@ const StudioApp = () => {
       : area === 'About' ? <AboutEditor {...editorProps} />
         : area === 'Research' ? <ResearchEditor {...editorProps} />
           : area === 'Projects' ? <ProjectsEditor {...editorProps} />
-            : area === 'Garden' ? <GardenEditor {...editorProps} />
+            : area === 'Notes' ? <NotesEditor {...editorProps} />
               : area === 'SEO' ? <SeoEditor {...editorProps} />
                 : area === 'Articles' ? <ArticlesEditor articles={snapshot.articles} onRefresh={loadSnapshot} onDirtyChange={setArticleDirty} discardSignal={discardSignal} />
                   : area === 'Uploads' ? <UploadsEditor uploads={snapshot.uploads} onRefresh={loadSnapshot} onDirtyChange={setUploadDirty} discardSignal={discardSignal} />

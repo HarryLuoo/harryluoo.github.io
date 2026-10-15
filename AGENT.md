@@ -198,19 +198,8 @@ and Verify artifact expectations. Keep one owner for every value.
 - CI/deployment: `.github/workflows/deploy.yml` uses Node 20, `npm ci`, the same
   Verify command, and uploads its existing `dist` before GitHub Pages deploys.
 
-## Pre-Retirement Legacy
+## Legacy Retirement
 
-The active entry is `index.tsx -> ./src/App`. Root `App.tsx`, `constants.tsx`,
-`types.ts`, `data.ts`, `data.json`, `cms.py`, `metadata.json`, `components/`,
-`pages/`, and `posts/` are inactive rollback material, not a second authority.
-Do not edit or delete them without explicit user-approved retirement.
-
-While the complete legacy tree and dependencies remain, the bounded emergency
-rollback is the single `index.tsx` import switch to root `./App`. It serves the
-older legacy snapshot, not newer canonical content. Verify and preview before
-any push.
-
-After a reviewed retirement commit, rollback with a reviewed
-`git revert <reviewed-cutover-commit>`, then Verify and preview. Do not reset or
-manually reconstruct a partial legacy tree. Preserve reconstruction,
-investigation, handoff, and design documents as historical evidence.
+The pre-2026 legacy renderer, its data files, and the reconstruction docs were
+retired in October 2026. They remain in Git history; restore with normal
+`git revert` of the retirement commit if ever needed.

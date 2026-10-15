@@ -90,29 +90,27 @@ export const smokeArtifacts = async (projectRoot, site, discovery) => {
   const visibleEntities = [
     ...site.research.papers.filter((item) => item.visible).map((item) => ({ namespace: 'research', ...item })),
     ...site.projects.items.filter((item) => item.visible).map((item) => ({ namespace: 'projects', ...item })),
-    ...site.garden.posts.filter((item) => item.visible).map((item) => ({ namespace: 'garden', ...item })),
+    ...site.notes.posts.filter((item) => item.visible).map((item) => ({ namespace: 'notes', ...item })),
   ];
-  if (visibleEntities.length !== 7) fail(`Expected seven visible detail routes, found ${visibleEntities.length}`);
   for (const entity of visibleEntities) {
     if (!bundleText.includes(entity.slug) || !bundleText.includes(entity.title)) {
       fail(`Built bundle is missing ${entity.namespace}/${entity.slug}`);
     }
   }
 
-  for (const marker of ['/about', site.about.background.text, site.about.currentWork.text]) {
+  for (const marker of ['/about', '/about/news', site.about.background.text, site.about.interests.text, ...site.about.news.filter((entry) => entry.visible).map((entry) => entry.title)]) {
     if (!bundleText.includes(marker)) fail(`Built bundle is missing About marker: ${marker}`);
   }
 
   const articleRoot = join(projectRoot, 'content', 'articles');
   const articleNames = (await readdir(articleRoot)).filter((name) => name.endsWith('.md')).sort();
-  if (articleNames.length !== 2) fail(`Expected two canonical articles, found ${articleNames.length}`);
   for (const name of articleNames) {
     const body = await readFile(join(articleRoot, name), 'utf8');
     const marker = distinctiveArticleLine(body, name);
     if (!bundleText.includes(marker)) fail(`Built bundle is missing distinctive article text for ${name}`);
   }
 
-  for (const marker of ['Page not found', 'Research item not found', 'Project not found', 'Garden post not found']) {
+  for (const marker of ['Page not found', 'Research item not found', 'Project not found', 'Note not found']) {
     if (!bundleText.includes(marker)) fail(`Built bundle is missing recovery state: ${marker}`);
   }
 

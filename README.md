@@ -91,19 +91,20 @@ Public routes use `HashRouter`:
 ```text
 #/
 #/about
+#/about/news
 #/research
 #/research/:slug
 #/projects
 #/projects/:slug
-#/garden
-#/garden/:slug
+#/notes
+#/notes/:slug
 ```
 
 Unknown routes and missing entities render code-owned recovery states.
 
 ## Editing In Studio
 
-The Studio has Shell, Home, About, Research, Projects, Garden, Articles,
+The Studio has Shell, Home, About, Research, Projects, Notes, Articles,
 Uploads, SEO, and Verify/Publish areas. Structured saves validate the complete
 candidate. Article and upload operations affect one file at a time.
 
@@ -216,23 +217,8 @@ Pushes to `main` and manual workflow dispatches run
 `npm run verify`, uploads that command's `dist`, and deploys the artifact with
 GitHub Pages. There is no second production build in the deployment job.
 
-## Pre-Retirement Status
+## Legacy Retirement
 
-The reconstructed renderer is active through `index.tsx -> src/App.tsx`.
-Legacy root `App.tsx`, `constants.tsx`, `types.ts`, `data.ts`, `data.json`,
-`cms.py`, `metadata.json`, `components/`, `pages/`, and `posts/` remain only as
-temporary rollback material. Do not update them as a second content source and
-do not delete them without explicit user-approved retirement.
-
-Before retirement, the emergency renderer rollback is the single `index.tsx`
-import change from `./src/App` to root `./App`, and it serves the older legacy
-snapshot rather than newer Studio content. Verify and preview before any push.
-
-After a reviewed retirement commit, rollback through normal history:
-
-```bash
-git revert <reviewed-cutover-commit>
-```
-
-Review the revert, run `npm run verify`, and inspect the production preview
-before pushing. Do not reconstruct or restore only part of the retired tree.
+The pre-2026 legacy renderer, its data files, and the reconstruction docs were
+retired in October 2026. They remain in Git history; restore with normal
+`git revert` of the retirement commit if ever needed.

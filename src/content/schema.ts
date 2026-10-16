@@ -166,6 +166,7 @@ const projectSchema = z.strictObject({
   liveUrl: externalUrl.optional(),
   articleSlug: slug.optional(),
   updated: monthDate.optional(),
+  undergrad: z.literal(true).optional(),
   ...visibility,
 });
 

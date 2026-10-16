@@ -230,6 +230,20 @@
   "projects": {
     "items": [
       {
+        "slug": "visual-prelude-solid-state-physics",
+        "title": "A Visual Prelude to Solid State Physics",
+        "description": "A YouTube video series building intuition for solid state physics through animated visuals, starting with the Fermi energy.",
+        "tags": [
+          "Video Series",
+          "Solid State Physics",
+          "Teaching"
+        ],
+        "liveUrl": "https://www.youtube.com/playlist?list=PLS7cPUkvlYu0",
+        "updated": "2026-10",
+        "visible": true,
+        "order": 0
+      },
+      {
         "slug": "badger-solar-car-optimization",
         "title": "Badger Solar Car Optimization",
         "description": "Numerical simulation and optimization system for a solar-powered race car. Implemented receding horizon control and modeled electrical/mechanical components (Solar Array, BMS, Resistive Forces) in MATLAB & Simulink.",
@@ -238,8 +252,9 @@
           "Simulink",
           "Control Theory"
         ],
+        "undergrad": true,
         "visible": true,
-        "order": 0
+        "order": 1
       },
       {
         "slug": "campus-dining-optimization",
@@ -250,8 +265,9 @@
           "MILP",
           "Python"
         ],
+        "undergrad": true,
         "visible": true,
-        "order": 2
+        "order": 3
       },
       {
         "slug": "multi-qubit-crosstalk-simulation",
@@ -263,8 +279,9 @@
           "Quantum Physics"
         ],
         "repositoryUrl": "https://github.com/HarryLuoo/quantum_chip_2025_gymrats",
+        "undergrad": true,
         "visible": true,
-        "order": 1
+        "order": 2
       },
       {
         "slug": "brachistochrone-fea-solution",
@@ -277,8 +294,9 @@
         ],
         "repositoryUrl": "https://github.com/HarryLuoo/FEA_Brachistochrone",
         "articleSlug": "brachistochrone",
+        "undergrad": true,
         "visible": true,
-        "order": 3
+        "order": 4
       },
       {
         "slug": "deep-time-steps-patterns-of-wear",
@@ -289,8 +307,9 @@
           "CNN",
           "Stochastic Modeling"
         ],
+        "undergrad": true,
         "visible": true,
-        "order": 4
+        "order": 5
       }
     ]
   },
@@ -334,7 +353,7 @@
           "Error Mitigation"
         ],
         "pdfUpload": "/uploads/ES-ZNE_talk_Westlake.pdf",
-        "updated": "2026-10",
+        "updated": "2026-07",
         "visible": true,
         "order": 2
       }
@@ -358,6 +377,9 @@
     "QuTiP",
     "Simulation",
     "Simulink",
-    "Stochastic Modeling"
+    "Solid State Physics",
+    "Stochastic Modeling",
+    "Teaching",
+    "Video Series"
   ]
 }
